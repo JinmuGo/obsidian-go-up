@@ -1,4 +1,4 @@
-import { Plugin } from "obsidian";
+import { Plugin, Notice } from "obsidian";
 
 interface Properties {
 	up?: string;
@@ -29,8 +29,14 @@ export default class MyCustomPlugin extends Plugin {
 			if (properties.up) {
 				const targetPage = properties.up;
 				this.app.workspace.openLinkText(targetPage, "", false);
+			} else {
+				this.displayNotification("There is No Upper Page");
 			}
 		}
+	}
+
+	private displayNotification(message: string, timeout = 3000) {
+		new Notice(message, timeout);
 	}
 
 	private parseProperties(content: string): Properties {
