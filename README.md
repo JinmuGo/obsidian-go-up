@@ -13,7 +13,7 @@ This plugin allows users to quickly navigate to a specified "parent" page by uti
 
     ```yaml
     ---
-    up: ParentNote
+    up: [[ParentNote]]
     ---
     ```
 
