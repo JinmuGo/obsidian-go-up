@@ -6,6 +6,8 @@ interface Properties {
 }
 
 export default class MyCustomPlugin extends Plugin {
+	activeNotice: Notice | null = null;
+
 	onload() {
 		this.addCommand({
 			id: "goUp",
@@ -36,7 +38,13 @@ export default class MyCustomPlugin extends Plugin {
 	}
 
 	private displayNotification(message: string, timeout = 3000) {
-		new Notice(message, timeout);
+		if (this.activeNotice) return;
+
+		this.activeNotice = new Notice(message, timeout);
+
+		setTimeout(() => {
+			this.activeNotice = null;
+		}, timeout);
 	}
 
 	private parseProperties(content: string): Properties {
