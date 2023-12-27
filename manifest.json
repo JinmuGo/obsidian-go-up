@@ -1,6 +1,6 @@
 {
-	"id": "goUp",
-	"name": "go Up",
+	"id": "GoUp",
+	"name": "Go Up",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "go upper page",
