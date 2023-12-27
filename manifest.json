@@ -1,10 +1,10 @@
 {
-	"id": "GoUp",
+	"id": "go-up",
 	"name": "Go Up",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "go upper page",
+	"description": "Go Upper Page",
 	"author": "JinMu Go",
 	"authorUrl": "https://github.com/JinMuGo",
-	"isDesktopOnly": false
+	"isDesktopOnly": true
 }

@@ -1,5 +1,7 @@
 # obsidian-GoUp
 
+> Go Upper Page
+
 This plugin allows users to quickly navigate to a specified "parent" page by utilizing a custom property in the page's front matter.
 
 # How to Use
