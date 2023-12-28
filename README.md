@@ -19,4 +19,4 @@ This plugin allows users to quickly navigate to a specified "parent" page by uti
 
     Replace ParentNote with the link to the page you wish to navigate to. <br/>
 
-3. Navigate with Ease: With the up property set, simply activate the plugin to navigate to the specified parent page.
+3. Use the Keyboard Shortcut: With the up property set, press `Cmd + Shift + U` to navigate to the specified parent page.
