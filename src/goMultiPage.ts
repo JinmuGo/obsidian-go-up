@@ -11,7 +11,8 @@ const goMultiPage = (upPages: Array<string>, goPage: goPageType, app: App) => {
 		return prev;
 	}, []);
 
-	new MultiPageModal(app, goPage, upPages).open();
+	if (upPages.length === 1) goPage(upPages[0], "", false);
+	else new MultiPageModal(app, goPage, upPages).open();
 };
 
 export default goMultiPage;
