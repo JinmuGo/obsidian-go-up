@@ -11,15 +11,9 @@ export default class goUp extends Plugin {
 
 	onload() {
 		this.addCommand({
-			id: "goUp",
-			name: "Go Up",
+			id: "upper-page",
+			name: "Go Upper Page",
 			callback: this.goUp.bind(this),
-			hotkeys: [
-				{
-					modifiers: ["Meta", "Shift"],
-					key: "u",
-				},
-			],
 		});
 	}
 
