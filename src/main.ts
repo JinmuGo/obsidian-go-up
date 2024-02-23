@@ -1,5 +1,4 @@
 import { Plugin, Notice } from "obsidian";
-import { loadFront } from "yaml-front-matter";
 import makeNotice from "./utils/makeNotice";
 import goMultiPage from "./goMultiPage";
 import goSinglePage from "./goSinglePage";
@@ -33,15 +32,15 @@ export default class goUp extends Plugin {
 	private async goUp() {
 		const currentFile = this.app.workspace.getActiveFile();
 		if (currentFile === null) return;
-		const fileContent: string = await this.app.vault.read(currentFile);
-		const pageObj = loadFront(fileContent);
-		if (pageObj.up === undefined) {
+		const frontmatter =
+			this.app.metadataCache.getFileCache(currentFile)?.frontmatter;
+
+		if (frontmatter?.["up"] === undefined) {
 			this.alertNoUpperPage();
 			return;
 		}
-
-		Array.isArray(pageObj.up)
-			? goMultiPage(pageObj.up, this.#goPage, this.app)
-			: goSinglePage(pageObj.up, this.#goPage);
+		Array.isArray(frontmatter["up"])
+			? goMultiPage(frontmatter["up"], this.#goPage, this.app)
+			: goSinglePage(frontmatter["up"], this.#goPage);
 	}
 }
