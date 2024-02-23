@@ -12,7 +12,7 @@ export default class goUp extends Plugin {
 	onload() {
 		this.addCommand({
 			id: "upper-page",
-			name: "Go Upper Page",
+			name: "Go upper page",
 			callback: this.goUp.bind(this),
 		});
 	}
@@ -24,7 +24,7 @@ export default class goUp extends Plugin {
 	private alertNoUpperPage() {
 		if (this.#activeNotice) return;
 		this.#activeNotice = makeNotice(
-			"There is No Upper Page",
+			"There is no upper page",
 			this.#timeout
 		);
 		setTimeout(() => this.switchActiveNotice(null), this.#timeout);
