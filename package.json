@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-go-up",
 	"version": "1.0.0",
-	"description": "go upper page",
+	"description": "Go to the pages that says 'up' property",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

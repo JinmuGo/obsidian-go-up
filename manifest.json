@@ -3,7 +3,7 @@
 	"name": "Go Up",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Go Upper Page",
+	"description": "Go to the pages that says 'up' property",
 	"author": "JinMu Go",
 	"authorUrl": "https://github.com/JinMuGo",
 	"isDesktopOnly": true
