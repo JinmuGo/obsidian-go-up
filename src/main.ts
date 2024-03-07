@@ -34,13 +34,14 @@ export default class goUp extends Plugin {
 		if (currentFile === null) return;
 		const frontmatter =
 			this.app.metadataCache.getFileCache(currentFile)?.frontmatter;
+		const upProperty = frontmatter?.["up"];
 
-		if (frontmatter?.["up"] === undefined) {
+		if (upProperty === undefined) {
 			this.alertNoUpperPage();
 			return;
 		}
-		Array.isArray(frontmatter["up"])
-			? goMultiPage(frontmatter["up"], this.#goPage, this.app)
-			: goSinglePage(frontmatter["up"], this.#goPage);
+		Array.isArray(upProperty)
+			? goMultiPage(upProperty, this.#goPage, this.app)
+			: goSinglePage(upProperty, this.#goPage);
 	}
 }
