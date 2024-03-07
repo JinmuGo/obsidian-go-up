@@ -40,8 +40,11 @@ export default class goUp extends Plugin {
 			this.alertNoUpperPage();
 			return;
 		}
-		Array.isArray(upProperty)
-			? goMultiPage(upProperty, this.#goPage, this.app)
-			: goSinglePage(upProperty, this.#goPage);
+
+		if (Array.isArray(upProperty)) {
+			goMultiPage(upProperty, this.#goPage, this.app);
+		} else {
+			goSinglePage(upProperty, this.#goPage);
+		}
 	}
 }
