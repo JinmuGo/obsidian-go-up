@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-go-up",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Go to the pages that says 'up' property",
 	"main": "main.js",
 	"scripts": {
