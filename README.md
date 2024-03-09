@@ -31,3 +31,10 @@ This plugin allows users to quickly navigate to a specified "parent" page by uti
 
 3. Use the Keyboard Shortcut: With the up property set, you can set the Keyboard Shortcut. <br />
    i recommend `Cmd + Shift + U` to navigate to the specified parent page.
+
+
+# Customize your own parent property
+
+go to setting tab "Go Up" and fill out Parent property to use "parent" notes.
+
+![setting tab](./public/setting.png)
