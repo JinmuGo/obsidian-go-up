@@ -1,4 +1,4 @@
-# obsidian-GoUp
+# obsidian-go-up
 
 > Go Upper Page
 
