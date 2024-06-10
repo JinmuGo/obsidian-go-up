@@ -6,3 +6,7 @@ export type goPageType = (
 	newLeaf?: PaneType | boolean,
 	openViewState?: OpenViewState
 ) => Promise<void>;
+
+export type propertiesType = {
+	[key: string]: string[] | null;
+};
