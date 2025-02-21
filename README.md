@@ -1,3 +1,8 @@
+<div align="center">
+  <br>
+  <img src="./public/logo.svg" alt="logo" width="400px;">
+</div>
+
 # obsidian-go-up
 
 > Go Upper Page
