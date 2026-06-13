@@ -1,6 +1,9 @@
 import esbuild from "esbuild";
 import process from "process";
-import builtins from "builtin-modules";
+import { builtinModules as builtins } from "node:module";
+import { readFileSync } from "fs";
+
+const manifest = JSON.parse(readFileSync("./manifest.json", "utf8"));
 
 const banner =
 `/*
@@ -38,6 +41,12 @@ const context = await esbuild.context({
 	sourcemap: prod ? false : "inline",
 	treeShaking: true,
 	outfile: "main.js",
+	minify: prod,
+	define: {
+		"process.env.TELEMETRY_ENDPOINT": JSON.stringify(process.env.TELEMETRY_ENDPOINT || "https://telemetry.jinmu.me"),
+		"process.env.TELEMETRY_API_KEY": JSON.stringify(process.env.TELEMETRY_API_KEY || "telemetry-dev-key"),
+		"process.env.PLUGIN_VERSION": JSON.stringify(manifest.version),
+	},
 });
 
 if (prod) {

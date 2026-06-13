@@ -24,7 +24,7 @@ class goUpSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						this.plugin.settings.parentProp = value;
 						await this.plugin.saveSettings();
-						this.applySettings();
+						await this.applySettings();
 					})
 			);
 
@@ -36,13 +36,27 @@ class goUpSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						this.plugin.settings.addUpPropertyOnCreate = value;
 						await this.plugin.saveSettings();
-						this.applySettings();
+						await this.applySettings();
+					});
+			});
+
+		new Setting(containerEl)
+			.setName("Send anonymous usage data")
+			.setDesc("Help improve the plugin by sending anonymous usage events. No personal data or note content is ever sent.")
+			.addToggle((toggle) => {
+				toggle
+					.setValue(this.plugin.settings.telemetryEnabled)
+					.onChange(async (value) => {
+						this.plugin.settings.telemetryEnabled = value;
+						await this.plugin.saveSettings();
+						this.plugin.telemetry.setEnabled(value);
+						if (value) this.plugin.telemetry.track("plugin_enabled");
 					});
 			});
 	}
 
-	private applySettings() {
-		this.plugin.loadSettings();
+	private async applySettings() {
+		await this.plugin.loadSettings();
 		this.plugin.registerCreateFileEvent();
 	}
 }
