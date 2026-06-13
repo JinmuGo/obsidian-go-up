@@ -19,7 +19,7 @@ const goMultiPage = (upPages: Array<string>, goPage: goPageType, app: App) => {
 	}, []);
 
 	if (upPages.length === 1) {
-		goPage(upPages[0], "", false);
+		void goPage(upPages[0], "", false);
 	} else {
 		new MultiPageModal(app, goPage, upPages).open();
 	}

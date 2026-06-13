@@ -9,18 +9,37 @@ jobs:
     build:
         runs-on: ubuntu-latest
 
+        permissions:
+            contents: write
+            id-token: write
+            attestations: write
+
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@v4
 
             - name: Use Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
-                  node-version: "18.x"
+                  # Node 22+ is required: pnpm 11 depends on the node:sqlite
+                  # built-in module, which is unavailable on Node 18/20.
+                  node-version: "22.x"
+                  cache: "pnpm"
 
             - name: Build plugin
               run: |
-                  npm install
-                  npm run build
+                  pnpm install --frozen-lockfile
+                  pnpm run build
+
+            - name: Attest build provenance
+              uses: actions/attest-build-provenance@v1
+              with:
+                  subject-path: |
+                      main.js
+                      manifest.json
+                      styles.css
 
             - name: Create release
               env:

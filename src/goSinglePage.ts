@@ -12,7 +12,7 @@ const goSinglePage = (upPage: string, goPage: goPageType) => {
 	if (checkAlias(upPageName)) {
 		upPageName = getPageNameInAlias(upPageName);
 	}
-	goPage(upPageName, "", false);
+	void goPage(upPageName, "", false);
 };
 
 export default goSinglePage;

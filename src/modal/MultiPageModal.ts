@@ -22,11 +22,11 @@ export class MultiPageModal extends SuggestModal<pageType> {
 
 	// Renders each suggestion item.
 	renderSuggestion(page: pageType, el: HTMLElement) {
-		el.createEl("div", { text: page ?? undefined });
+		el.createDiv({ text: page ?? undefined });
 	}
 
 	// Perform action on the selected suggestion.
-	onChooseSuggestion(page: pageType, evt: MouseEvent | KeyboardEvent) {
-		this.goPage(page, "", false);
+	onChooseSuggestion(page: pageType, _evt: MouseEvent | KeyboardEvent) {
+		void this.goPage(page, "", false);
 	}
 }
