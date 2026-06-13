@@ -23,7 +23,9 @@ jobs:
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: "18.x"
+                  # Node 22+ is required: pnpm 11 depends on the node:sqlite
+                  # built-in module, which is unavailable on Node 18/20.
+                  node-version: "22.x"
                   cache: "pnpm"
 
             - name: Build plugin
