@@ -1,4 +1,7 @@
 allowBuilds:
   esbuild: true
+  # Hooks are installed via the `prepare` script (lefthook install), so
+  # lefthook's own postinstall is not needed.
+  lefthook: false
 onlyBuiltDependencies:
   - esbuild
