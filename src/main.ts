@@ -104,7 +104,7 @@ export default class goUp extends Plugin {
 			`There is no upper page in "${this.settings.parentProp}" property`,
 			this.#timeout
 		);
-		activeWindow.setTimeout(() => this.switchActiveNotice(null), this.#timeout);
+		window.setTimeout(() => this.switchActiveNotice(null), this.#timeout);
 	}
 
 	private alertMustSettingParentProp() {
@@ -113,7 +113,7 @@ export default class goUp extends Plugin {
 			"Please set your parent property in the settings",
 			this.#timeout
 		);
-		activeWindow.setTimeout(() => this.switchActiveNotice(null), this.#timeout);
+		window.setTimeout(() => this.switchActiveNotice(null), this.#timeout);
 	}
 
 	private async goUp() {

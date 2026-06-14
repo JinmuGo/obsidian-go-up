@@ -1,3 +1,5 @@
+import { Platform, requestUrl } from "obsidian";
+
 const ENDPOINT = (process.env.TELEMETRY_ENDPOINT as string) || "https://telemetry.jinmu.me";
 const API_KEY = (process.env.TELEMETRY_API_KEY as string) || "telemetry-dev-key";
 
@@ -12,6 +14,15 @@ interface TelemetryEvent {
 const FLUSH_INTERVAL = 2_000;
 const BATCH_THRESHOLD = 10;
 const MAX_QUEUE = 50;
+
+function detectPlatform(): string {
+    if (Platform.isMacOS) return "macos";
+    if (Platform.isWin) return "windows";
+    if (Platform.isLinux) return "linux";
+    if (Platform.isIosApp) return "ios";
+    if (Platform.isAndroidApp) return "android";
+    return "unknown";
+}
 
 export class Telemetry {
     private queue: TelemetryEvent[] = [];
@@ -36,7 +47,7 @@ export class Telemetry {
             app: this.app,
             event,
             context: {
-                platform: navigator.platform,
+                platform: detectPlatform(),
                 version: this.version,
                 obsidian: (window as unknown as { apiVersion?: string }).apiVersion,
             },
@@ -73,14 +84,15 @@ export class Telemetry {
         if (this.queue.length === 0) return;
         const batch = this.queue.splice(0);
         try {
-            await fetch(`${ENDPOINT}/v1/events/batch`, {
+            await requestUrl({
+                url: `${ENDPOINT}/v1/events/batch`,
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "X-API-Key": API_KEY,
                 },
                 body: JSON.stringify({ events: batch }),
-                keepalive: true,
+                throw: false,
             });
         } catch {
             // silently drop
