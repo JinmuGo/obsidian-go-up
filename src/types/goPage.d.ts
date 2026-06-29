@@ -10,3 +10,5 @@ export type goPageType = (
 export type propertiesType = {
 	[key: string]: string[] | null;
 };
+
+export type NavigationMode = "replace" | "new-tab";
