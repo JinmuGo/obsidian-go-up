@@ -3,7 +3,7 @@ import makeNotice from "./utils/makeNotice";
 import goMultiPage from "./goMultiPage";
 import goSinglePage from "./goSinglePage";
 import goUpSettingTab from "./setting";
-import { propertiesType } from "./types/goPage";
+import { propertiesType, NavigationMode } from "./types/goPage";
 import { Telemetry } from "./telemetry";
 
 interface goUpSettings {
@@ -33,7 +33,13 @@ export default class goUp extends Plugin {
 		this.addCommand({
 			id: "upper-page",
 			name: "Navigate to parent page",
-			callback: this.goUp.bind(this),
+			callback: () => this.goUp("replace"),
+		});
+
+		this.addCommand({
+			id: "upper-page-new-tab",
+			name: "Navigate to parent page in new tab",
+			callback: () => this.goUp("new-tab"),
 		});
 
 		this.addSettingTab(new goUpSettingTab(this.app, this));
@@ -116,7 +122,7 @@ export default class goUp extends Plugin {
 		window.setTimeout(() => this.switchActiveNotice(null), this.#timeout);
 	}
 
-	private async goUp() {
+	private async goUp(mode: NavigationMode) {
 		if (
 			this.settings.parentProp === "" ||
 			this.settings.parentProp === null
@@ -137,10 +143,10 @@ export default class goUp extends Plugin {
 
 		if (Array.isArray(upProperty)) {
 			this.telemetry.track("upper_page_invoked", { mode: "multi" });
-			goMultiPage(upProperty, this.#goPage, this.app);
+			goMultiPage(upProperty, this.#goPage, this.app, mode);
 		} else {
 			this.telemetry.track("upper_page_invoked", { mode: "single" });
-			goSinglePage(upProperty, this.#goPage);
+			goSinglePage(upProperty, this.#goPage, this.app, mode);
 		}
 	}
 }

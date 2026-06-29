@@ -1,11 +1,17 @@
 import { MultiPageModal } from "./modal/MultiPageModal";
-import { goPageType } from "./types/goPage";
+import { goPageType, NavigationMode } from "./types/goPage";
 import checkAlias from "./utils/checkAlias";
 import getPageName from "./utils/getPageName";
 import type { App } from "obsidian";
 import getPageNameInAlias from "./utils/getPageNameInAlias";
+import navigateToParent from "./navigateToParent";
 
-const goMultiPage = (upPages: Array<string>, goPage: goPageType, app: App) => {
+const goMultiPage = (
+	upPages: Array<string>,
+	goPage: goPageType,
+	app: App,
+	mode: NavigationMode
+) => {
 	upPages = upPages.reduce((prev: string[], upPage: string) => {
 		let pageName = getPageName(upPage);
 		if (pageName === null) {
@@ -19,9 +25,9 @@ const goMultiPage = (upPages: Array<string>, goPage: goPageType, app: App) => {
 	}, []);
 
 	if (upPages.length === 1) {
-		void goPage(upPages[0], "", false);
+		navigateToParent(app, goPage, upPages[0], mode);
 	} else {
-		new MultiPageModal(app, goPage, upPages).open();
+		new MultiPageModal(app, goPage, upPages, mode).open();
 	}
 };
 

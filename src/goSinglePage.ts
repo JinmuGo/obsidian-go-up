@@ -1,9 +1,16 @@
-import { goPageType } from "./types/goPage";
+import { App } from "obsidian";
+import { goPageType, NavigationMode } from "./types/goPage";
 import checkAlias from "./utils/checkAlias";
 import getPageName from "./utils/getPageName";
 import getPageNameInAlias from "./utils/getPageNameInAlias";
+import navigateToParent from "./navigateToParent";
 
-const goSinglePage = (upPage: string, goPage: goPageType) => {
+const goSinglePage = (
+	upPage: string,
+	goPage: goPageType,
+	app: App,
+	mode: NavigationMode
+) => {
 	let upPageName = getPageName(upPage);
 
 	if (upPageName === null) {
@@ -12,7 +19,8 @@ const goSinglePage = (upPage: string, goPage: goPageType) => {
 	if (checkAlias(upPageName)) {
 		upPageName = getPageNameInAlias(upPageName);
 	}
-	void goPage(upPageName, "", false);
+
+	navigateToParent(app, goPage, upPageName, mode);
 };
 
 export default goSinglePage;
